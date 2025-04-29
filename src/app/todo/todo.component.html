@@ -1,0 +1,13 @@
+<h2>Liste de Tâches</h2>
+
+<input [(ngModel)]="newTask" placeholder="Nouvelle tâche" />
+<button (click)="addTask()">Ajouter</button>
+
+<ul>
+    @for(task of Tasks; track $index){
+    <li>
+        {{task}}
+        <button (click)="removeTask($index)">supprimer</button>
+    </li>
+}
+</ul>
