@@ -1,13 +1,34 @@
-<h2>Liste de Tâches</h2>
+<body>
+<div class="container">
+  <div class="todo-form">
+    <h2>Ma To-Do List</h2>
 
-<input [(ngModel)]="newTask" placeholder="Nouvelle tâche" />
-<button (click)="addTask()">Ajouter</button>
+    <div class="input-group">
+      <input [(ngModel)]="newTask" placeholder="Ajouter une tâche"(keydown.enter)="addTask()"  />
+      <button (click)="addTask()">Ajouter</button>
+    </div>
+  </div>
+      <div id="divBtn" *ngIf="tasks.length > 0" class="d-flex justify-content-between mb-3">
+    <button (click)="markAll()" class="btn btn-success">Tout cocher</button>
+    <button (click)="clearAll()" class="btn btn-delet">Tout supprimer</button>
+  </div>
+  <div class="tasksDiv">
 
-<ul>
-    @for(task of Tasks; track $index){
-    <li>
-        {{task}}
-        <button (click)="removeTask($index)">supprimer</button>
-    </li>
-}
-</ul>
+    <div
+      class="task-list-item"
+      *ngFor="let task of tasks; let i = index">
+
+      <div class="left-part">
+        <div 
+          class="custom-checkbox" 
+          [class.checked]="task.completed" 
+          (click)="toggleTaskCompletion(i)">
+        </div>
+        <span [class.completed]="task.completed">{{ task.task }}</span>
+      </div>
+      <button (click)="removeTask(i)" class="btn btn-danger">🗑</button>
+    </div>
+  </div>
+</div>
+
+</body>
